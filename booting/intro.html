@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Booting: Introduction - by Jeremy Soller</title>
+		<link rel="stylesheet" href="../style.css"/>
+	</head>
+	<body>
+		<h1>Booting: Introduction</h1>
+		<p><strong>
+			How modern computers get from the power button to your desktop.
+		</strong></p>
+		<p><em>By Jeremy Soller</em></p>
+
+<div style="width: 80ch;">
+<p>
+Computers are complicated machines, that themselves consist of many smaller
+machines. It would take many years to understand the operations of just one such
+component. This blog will attempt to explain the boot process from the point of
+view of the firmware and software, and will abstract some parts of the boot
+process for the purpose of simplicity. Bear in mind, that this simplification
+will still not make things <em>simple</em>.
+</p>
+<p>
+Also, there is considerable variability among computers, their firmware, and the
+software that they run. In the past that has meant that the boot process could
+vary wildly, though it would usually have some common concepts. For modern
+computers and operating systems, the boot process generally uses
+<a href="https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface">Unified Extensible Firmware Interface (UEFI)</a>
+and
+<a href="https://en.wikipedia.org/wiki/Advanced_Configuration_and_Power_Interface">Advanced Configuration and Power Interface (ACPI)</a>,
+so this is what we will discuss.
+</p>
+<p>
+With those stipulations out of the way, I'd like to first introduce the concept
+of booting from a high level perspective. A user presses the power button on a
+computer, the computer does something, a login screen is shown, the user logs
+in, and they can now continue doing whatever they planned to do with the
+computer. To most users, the whole process of booting - whatever time the
+computer takes to prepare itself to be useful - seems as innocuous as it seems
+vestigial. On the one hand, there is little reason for most users to care about
+something that happens so rarely. On the other hand, it seems with such powerful
+systems that they really ought to just boot straight to the desktop. What is so
+important that the computer spends <em>billions</em> of cycles on it, while the
+user waits?
+</p>
+<p>
+It would be careless to say those cycles are not wasted. For sure, many of them
+are. But the truth about the boot process, is that our computer hardware has
+become so wildly complicated, running at the very edge of known physics, while
+at the same time computer firmware (and software) has absorbed as much code as
+programmers could fit into whatever storage holds it. This has led to boot times
+increasing over time, rather than decreasing, even if it should be possible to
+do the opposite.
+</p>
+<p>
+It would also not be nice to say firmware developers do not care about boot
+speed. Many of them do. But the environment that we operate in is one where the
+performance of components at runtime is vastly more important than their
+performance during boot. Additionally, there is a desire to push out hardware as
+soon as possible, bugs in firmware are often tolerated if they do not affect the
+runtime experience. For example, the firmware having to initialize something
+multiple times is a clear "bug", but in the firmware world it may be seen as a
+"feature" if it works around some issue and lets hardware ship sooner.
+</p>
+<p>
+Back to the point, we can guess the computer is doing something in that time,
+though it could probably do it better. We can guess that after the power button
+is pressed, a piece of code called "firmware" initializes some things, reads
+"software" from a storage device, and then transfers control to it. That
+software, the operating system, then has support for all the hardware on the
+computer, and abstracts it for other software to utilize. It is often not
+realized that the firmware, in many ways, resembles an operating system. It is
+composed of software, and has drivers for a wide set of hardware. The only real
+difference, then, is where it is stored.
+</p>
+</div>
+
+		<p><a href="rom.html">Next Chapter: Read-Only Memory</a></p>
+		<p><a href="index.html">Back to Blog Series</a></p>
+		<p>
+			Copyright 2021 Jeremy Soller, licensed <a href="../LICENSE">AGPLv3</a>.
+		</p>
+	</body>
+</html>
