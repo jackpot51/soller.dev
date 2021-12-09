@@ -1,3 +1,9 @@
+body {
+	margin: auto;
+	max-width: 100ch;
+	padding: 1ch 2ch;
+}
+
 @media(prefers-color-scheme: dark) {
 	body {
 		background-color: #303030;
