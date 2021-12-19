@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Booting: Read-Only Memory - by Jeremy Soller</title>
+		<link rel="stylesheet" href="../style.css"/>
+	</head>
+	<body>
+		<h1>Booting: Read-Only Memory</h1>
+		<p><strong>
+			How modern computers get from the power button to your desktop.
+		</strong></p>
+		<p><em>By Jeremy Soller</em></p>
+
+<div style="width: 80ch;">
+<p>
+There is a magic place where software becomes firmware, where open source
+becomes proprietary, and where open specifications become non-disclosure
+agreements. This, is Read-Only Memory, or ROM for short.
+</p>
+<p>
+ROM, clearly, is a contradiction in terms. Memory that can never be written, can
+never have anything to read. And while there is certainly ROM on your computer
+that can only be written once, most of the ROMs are rewritable. A more accurate
+term for this memory is usually
+<a href="https://en.wikipedia.org/wiki/Flash_memory">flash memory</a>,
+specifically NOR flash memory. NAND flash memory is more widely known and used
+in modern (writable) storage devices. NOR flash essentially allows fast random
+access and high reliability, but has very slow write speeds, making it ideal for
+storing software that does not change often - which we often refer to as
+firmware.
+</p>
+<p>
+These NOR flash memory chips are still often called ROMs and typically connect
+to the devices they store firmware for over
+<a href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface"> Serial
+Peripheral Interface (SPI)</a>. These SPI ROMs often have a standard pinout,
+making it fairly easy to read and write their contents with a programmer. ROMs
+can be internal, meaning they are inside of the device they connect with, or
+external, meaning they are a separate "chip". The data they store, is often
+called an "image" or more specifically a "firmware image". Writing this image to
+the ROM is usually called "flashing" or "programming".
+</p>
+<p>
+Most ROMs include a mixture of configuration data and executable code for the
+component connected to it. The device will typically execute code straight from
+the ROM from a pre-defined address. Some components have their own embedded boot
+ROM that will perform some initialization prior to loading code from an
+"external" (outside of the chip itself) ROM. For example, new Intel CPUs have a
+boot ROM that allows signature checking of the external ROM chip.
+</p>
+<p>
+We essentially segment software into two parts, one part that provides the
+capabilities for defining the hardware, and reading more software from writable
+storage devices is stored on a ROM and called "firmware". The rest, that can
+be stored on writable storage devices is just "software". Usually, there are
+many different firmware images stored on many different ROMs. For example, the
+network controller usually has its own firmware, often stored on its own ROM.
+Sometimes, this firmware is not even required for the boot process, and only
+provides optional functionality like network booting.
+</p>
+<p>
+With this information, we can finally determine one of the earliest steps in the
+boot process. When the power button is pressed, the CPU (in cohorts with the
+chipset), begins executing instructions in the embedded boot ROM, which contains
+what is usually proprietary code only known by the CPU manufacturer. This boot
+ROM firmware checks that the firmware stored on a rewritable ROM chip is valid,
+and then transfers execution to it. The interface for this transfer is vendor
+specific. On Intel CPUs, the CPU jumps to a specific address in the ROM chip,
+and it then becomes the responsibility of the firmware on the ROM chip to
+prepare hardware devices, like RAM, for the Operating System. Before is has RAM,
+though, it is going to need... RAM?
+</p>
+</div>
+
+		<p><a href="intro.html">Previous Chapter: Introduction</a></p>
+		<p><a href="index.html">Back to Blog Series</a></p>
+		<p>
+			Copyright 2021 Jeremy Soller, licensed <a href="../LICENSE">AGPLv3</a>.
+		</p>
+	</body>
+</html>

@@ -1,2 +1,1 @@
-# soller.dev
-https://soller.dev
+My personal website: https://soller.dev
